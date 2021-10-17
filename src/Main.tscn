@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Main.gd" type="Script" id=2]
+[ext_resource path="res://src/Levels/Level1/Level1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Enemies/Policial1.tscn" type="PackedScene" id=4]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Level1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1.49832, 311.648 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 683.333, 433.158 )
+
+[node name="Policial1" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1738.6, 897.31 )
+
+[node name="Policial2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 147.042, 110.108 )
+
+[node name="Policial3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1329.46, 203.222 )
+
+[node name="Policial4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 127.876, 645.699 )
+
+[node name="Policial5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 149.987, 1166.97 )
+
+[node name="Policial6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 712.067, 856.335 )
+
+[node name="Policial7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1690.87, 329.033 )
+
+[node name="Policial8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 951.598, 96.6533 )
+
+[node name="Policial9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1253.61, 1059.83 )
