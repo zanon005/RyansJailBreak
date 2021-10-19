@@ -40,3 +40,6 @@ position = Vector2( 951.598, 96.6533 )
 
 [node name="Policial9" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1253.61, 1059.83 )
+
+[node name="Policial10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2516.37, 630.012 )

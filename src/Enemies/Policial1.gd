@@ -23,5 +23,4 @@ func die():
 #Only colides with "player_weapon" layer
 func _on_BodyHitBox_area_entered(area):
 	print("hit policial")
-	print(area.name)
 	die()
