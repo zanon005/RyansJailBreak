@@ -98,24 +98,24 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
+"loop": false,
+"name": "attack",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 24 ), ExtResource( 33 ), ExtResource( 55 ), ExtResource( 45 ), ExtResource( 39 ), ExtResource( 60 ), ExtResource( 25 ), ExtResource( 43 ), ExtResource( 42 ), ExtResource( 40 ), ExtResource( 58 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 52 ), ExtResource( 62 ), ExtResource( 46 ), ExtResource( 22 ), ExtResource( 44 ), ExtResource( 63 ), ExtResource( 54 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
-"loop": true,
-"name": "attack",
-"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 56.4244, 49.4333 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 43, 109.5 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "attack"
 length = 0.5
 step = 0.005
@@ -150,10 +150,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.2, 0.405 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.235, 0.405 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, false, true ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyAnimation:frame")
@@ -182,7 +182,6 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "idle"
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyAnimation:animation")
 tracks/0/interp = 1
@@ -274,13 +273,12 @@ playing = true
 position = Vector2( 20, 38 )
 frames = SubResource( 2 )
 animation = "attack"
-frame = 13
+frame = 11
 speed_scale = 6.0
-playing = true
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
 position = Vector2( 13.5756, 1.93334 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=[
 "player_weapon",
@@ -289,11 +287,12 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2( 157, 1.5 )
-shape = SubResource( 5 )
+position = Vector2( 120, 0 )
+shape = SubResource( 4 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 8 )
+anims/attack = SubResource( 5 )
 anims/idle = SubResource( 6 )
 anims/walk = SubResource( 7 )
 
