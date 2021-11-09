@@ -98,19 +98,19 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
-"loop": false,
-"name": "attack",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 24 ), ExtResource( 33 ), ExtResource( 55 ), ExtResource( 45 ), ExtResource( 39 ), ExtResource( 60 ), ExtResource( 25 ), ExtResource( 43 ), ExtResource( 42 ), ExtResource( 40 ), ExtResource( 58 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 52 ), ExtResource( 62 ), ExtResource( 46 ), ExtResource( 22 ), ExtResource( 44 ), ExtResource( 63 ), ExtResource( 54 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
+"loop": false,
+"name": "attack",
+"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 56.4244, 49.4333 )
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 65.8975, 70.5571 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 43, 109.5 )
@@ -270,15 +270,15 @@ speed_scale = 6.0
 playing = true
 
 [node name="BodyAnimation" type="AnimatedSprite" parent="."]
-position = Vector2( 20, 38 )
+position = Vector2( 21.2599, 38 )
 frames = SubResource( 2 )
 animation = "attack"
 frame = 11
 speed_scale = 6.0
 
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-position = Vector2( 13.5756, 1.93334 )
-shape = SubResource( 3 )
+position = Vector2( -7.84307, 0.0434321 )
+shape = SubResource( 8 )
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=[
 "player_weapon",
