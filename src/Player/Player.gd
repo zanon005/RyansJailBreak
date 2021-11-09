@@ -31,10 +31,11 @@ func _physics_process(delta):
 
 
 func _on_AttackHitbox_body_entered(body):
-	print(body.get_name())
+	pass
+	#print(body.get_name())
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print("fim animacao ", anim_name) #Nao esta sendo executada nunca
+	#print("fim animacao ", anim_name) #Nao esta sendo executada nunca
 	if(anim_name == "attack"):
 		isAttacking = false
