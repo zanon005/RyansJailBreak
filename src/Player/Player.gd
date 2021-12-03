@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export var run_speed := 350
+export var health := 100
 onready var player_animation := $AnimationPlayer
 var isAttacking = false
 var velocity := Vector2()
