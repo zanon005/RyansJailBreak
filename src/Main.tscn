@@ -5,8 +5,12 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CurrentLevel" parent="." instance=ExtResource( 1 )]
+position = Vector2( 82.5674, 33.8703 )
 
 [node name="InterfaceDeJogo" type="Control" parent="."]
 margin_right = 40.0
