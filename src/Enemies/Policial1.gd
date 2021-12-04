@@ -9,7 +9,6 @@ var isDead := false
 var path : Array = [] # Array com a lista de pontos para se mover
 onready var levelNavigation := get_node("LevelNavigation")
 onready var player := get_node("Player")
-onready var lineToPathTarget := $LineToPathTarget
 
 func _ready():
 	yield(get_tree(), "idle_frame")
@@ -23,11 +22,11 @@ func _ready():
 	animation.play("walk")
 	
 func _physics_process(delta):
-	lineToPathTarget.global_position = Vector2.ZERO
-	if(player && levelNavigation):
-		generate_path()
-		navigate()
-	move()
+	if(!isDead):
+		if(player && levelNavigation):
+			generate_path()
+			navigate()
+		move()
 
 func navigate(): #Defines the next position the enemy must moove
 	if(path.size() > 1):
@@ -41,7 +40,6 @@ func navigate(): #Defines the next position the enemy must moove
 func generate_path():
 	if levelNavigation != null and player != null:
 		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
-		lineToPathTarget.points = path
 
 func die():
 	if(!isDead):
@@ -60,7 +58,8 @@ func move():
 
 #Only colides with "player_weapon" layer
 func _on_BodyHitBox_area_entered(area):
-	health = health - 50
-	if(health <= 0):
-		die()
+	if(!isDead):
+		health = health - 50
+		if(health <= 0):
+			die()
 	
