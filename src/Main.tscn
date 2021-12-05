@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/Levels/Level1/Fase1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Levels/Level1/Level1_V2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
 
 [node name="Main" type="Node2D"]
@@ -10,7 +10,6 @@ __meta__ = {
 }
 
 [node name="CurrentLevel" parent="." instance=ExtResource( 1 )]
-position = Vector2( 82.5674, 33.8703 )
 
 [node name="InterfaceDeJogo" type="Control" parent="."]
 margin_right = 40.0

@@ -1,10 +1,12 @@
 extends KinematicBody2D
 
-export var run_speed := 300
+export var run_speed := 150
 export var health := 100
 onready var animation := $PolicialAnimation
-onready var currentPathLine := $PathLine
+onready var bodyColision := $BodyShape
+onready var bodyHitbox := $BodyHitBox/CollisionShape2D
 var velocity := Vector2()
+signal state_changed(currentState)
 
 var playerIsSpoted : bool = false
 var lastSpotedPlayerPos := Vector2.ZERO
@@ -30,6 +32,7 @@ func _ready():
 	if(tree.has_group('Player')):
 		player = tree.get_nodes_in_group("Player")[0]
 	currentState = STATE.ROAMING
+	emit_signal("state_changed", currentState)
 	roamingPoints = tree.get_nodes_in_group("RoamingPoint")
 	pick_random_roaming_point()
 	animation.play("walk")
@@ -37,33 +40,35 @@ func _ready():
 	
 func _physics_process(_delta):
 	if(player && currentState != STATE.DEAD):
-		currentPathLine.global_position = Vector2.ZERO
 		lineOfSight.look_at(player.global_position)
 		check_if_player_is_in_visible_range()
-		look_at(currentDestinationPos)
 		_state_machine()
 		generate_path_to(currentDestinationPos)
 		navigate()
 		move()
-	print("CurrentState: '", 
-		STATE.keys()[currentState], 
-		"', GoingTo: [",currentRoamingIndexPoint,"] At: ",currentDestinationPos)
+	#print("CurrentState: '", 
+	#	STATE.keys()[currentState], 
+	#	"', GoingTo: [",currentRoamingIndexPoint,"] At: ",currentDestinationPos)
 		
 func _state_machine():
 	match currentState:
 			STATE.ROAMING:
 				if(playerIsSpoted):
 					currentState = STATE.CHASING_PLAYER
+					emit_signal("state_changed", STATE.keys()[currentState])
 				elif(check_if_reached_current_destination()):
 					pick_random_roaming_point()
 			STATE.CHASING_PLAYER:
 				if(!playerIsSpoted):
 					currentState = STATE.GOINGTO_LAST_KOWN_PLAYER_POS
+					emit_signal("state_changed", STATE.keys()[currentState])
 			STATE.GOINGTO_LAST_KOWN_PLAYER_POS:
 				if(playerIsSpoted):
 					currentState = STATE.CHASING_PLAYER
+					emit_signal("state_changed", STATE.keys()[currentState])
 				elif(check_if_reached_current_destination()):
 					currentState = STATE.ROAMING
+					emit_signal("state_changed", STATE.keys()[currentState])
 			STATE.DEAD:
 				pass
 
@@ -92,7 +97,7 @@ func check_if_player_is_in_visible_range() -> bool:
 
 #Pega ponto aleatorio no mapa para ir que seja diferente do anterior
 func pick_random_roaming_point():
-	print("PontoAtual: [",currentRoamingIndexPoint,"]", currentDestinationPos)
+	 #print("PontoAtual: [",currentRoamingIndexPoint,"]", currentDestinationPos)
 	
 	var newIndexRoamingPoint = randi() % len(roamingPoints)
 	while(newIndexRoamingPoint == currentRoamingIndexPoint):
@@ -100,12 +105,13 @@ func pick_random_roaming_point():
 	currentDestinationPos = roamingPoints[newIndexRoamingPoint].global_position
 	currentRoamingIndexPoint = newIndexRoamingPoint
 	
-	print("NovoPonto: [",newIndexRoamingPoint,"]", currentDestinationPos)
+	#print("NovoPonto: [",newIndexRoamingPoint,"]", currentDestinationPos)
 	reachedCurrentDestinationPos = false
 
 func navigate(): #Defines the next position the enemy must moove
 	if(currentPath.size() > 1):
 		velocity = global_position.direction_to(currentPath[1]) * run_speed
+		look_at(currentPath[1])
 		#	If the current global position is equal to current path point
 		# then pop this point that is already visited
 		if(compare_position_with_aprox_range(currentPath[0], global_position, 1)):
@@ -114,7 +120,6 @@ func navigate(): #Defines the next position the enemy must moove
 func generate_path_to(destination : Vector2):
 	if levelNavigation != null and player != null:
 		currentPath = levelNavigation.get_simple_path(global_position, destination, false)
-		currentPathLine.points = currentPath
 
 func die():
 	if(currentState != STATE.DEAD):
@@ -125,6 +130,10 @@ func die():
 			1:
 				animation.play("die2")
 		currentState = STATE.DEAD
+		emit_signal("state_changed", STATE.keys()[currentState])
+		bodyColision.set_deferred("disabled", true)
+		bodyHitbox.set_deferred("disabled", true)
+		
 
 func move():
 	move_and_slide(velocity, Vector2.UP)
