@@ -35,8 +35,6 @@ var lastKnownPlayerPosition := Vector2.ZERO
 var currentRoamingIndexPoint = 0;
 
 
-
-
 func _ready():
 	yield(get_tree(), "idle_frame")
 	var tree = get_tree()
@@ -46,24 +44,24 @@ func _ready():
 		player = tree.get_nodes_in_group("Player")[0]
 	if(tree.has_group('RoamingPoint')):
 		roamingPoints = tree.get_nodes_in_group("RoamingPoint")
-	currentState = STATE.ROAMING
-	emit_signal("state_changed", STATE.keys()[currentState])
+	_updateState(STATE.ROAMING)
+	pick_new_random_roaming_point()
 	animation.play("walk")
 	
 	
 func _physics_process(_delta):
 	if(player && currentState != STATE.DEAD):
 		lineOfSight.look_at(player.global_position)
-		_state_machine()
 		if(playerIsInFov):
 			check_if_player_is_in_visible_range()
+		_state_machine()
 		#print("PlayerSpoted?: ", (playerIsInFov && playerIsVisible) )
-		#generate_path_to(currentDestinationPos)
-		#navigate()
-		#move()
-	#print("CurrentState: '", 
-	#	STATE.keys()[currentState], 
-	#	"', GoingTo: [",currentRoamingIndexPoint,"] At: ",currentDestinationPos)
+		generate_path_to(currentPositionToGoTo)
+		navigate()
+		move()
+	print("CurrentState: '", 
+		STATE.keys()[currentState], 
+		"', GoingTo: [",currentRoamingIndexPoint,"] At: ",currentPositionToGoTo)
 		
 func _state_machine():
 	match currentState:
@@ -71,28 +69,39 @@ func _state_machine():
 				#If is roaming and sees the player, then start chasing
 				if( (playerIsInFov && playerIsVisible) ):
 					_updateState(STATE.CHASING_PLAYER)
+					_chasePlayer()
 				else:
 					#Stays in the roaming mode
-					pass
+					#Check if reached current roaming point and if so get a new one
+					if(check_if_reached_current_roaming_point()):
+						pick_new_random_roaming_point()
 			STATE.CHASING_PLAYER:
 				#Keep chasing while player is detected
 				if( !(playerIsInFov && playerIsVisible) ):
 					_updateState(STATE.GOINGTO_LAST_KOWN_PLAYER_POS)
 				else:
-					pass
+					_chasePlayer()
 			STATE.GOINGTO_LAST_KOWN_PLAYER_POS:
 				#	Saw the player again, start chasing!
 				if( (playerIsInFov && playerIsVisible) ):
 					_updateState(STATE.CHASING_PLAYER)
+					_chasePlayer()
 				#	Lost vision of player, going to last place player was
 				# when last place is found, return to roaming
-				elif (global_position == currentPositionToGoTo):
+				elif (check_if_reached_current_roaming_point()):
 					_updateState(STATE.ROAMING)
+					pick_new_random_roaming_point()
+				else:
 					pass
 			STATE.DEAD:
 				# Rip
 				pass
-				
+
+func _chasePlayer():
+	currentPositionToGoTo = player.global_position
+	#look_at(currentPositionToGoTo)
+	lastKnownPlayerPosition = currentPositionToGoTo
+
 func _updateState(newState):
 	currentState = newState
 	emit_signal("state_changed", STATE.keys()[newState])
@@ -105,12 +114,14 @@ func compare_position_with_aprox_range(pos1, pos2, tolerance=5):
 		return true
 	return false
 
-func check_if_reached_current_destination() -> bool:
-	#return compare_position_with_aprox_range(global_position, currentDestinationPos)
-	return true
+func check_if_reached_current_roaming_point() -> bool:
+	if(global_position.distance_to(currentPositionToGoTo) < 5):
+		return true
+	else:
+		return false
 
 #Pega ponto aleatorio no mapa para ir que seja diferente do anterior
-func pick_random_roaming_point():
+func pick_new_random_roaming_point():
 	 #print("PontoAtual: [",currentRoamingIndexPoint,"]", currentDestinationPos)
 	var newIndexRoamingPoint = randi() % len(roamingPoints)
 	while(newIndexRoamingPoint == currentRoamingIndexPoint):
@@ -127,8 +138,8 @@ func generate_path_to(destination : Vector2):
 func navigate(): #Defines the next position the enemy must moove
 	if(currentPath.size() > 1):
 		velocity = global_position.direction_to(currentPath[1]) * run_speed
-		if(currentState != STATE.CHASING_PLAYER):
-			look_at(currentPath[1])
+		#if(currentState != STATE.CHASING_PLAYER):
+		look_at(currentPath[1])
 		#	If the current global position is equal to current path point
 		# then pop this point that is already visited
 		if(compare_position_with_aprox_range(currentPath[0], global_position, 1)):
@@ -148,7 +159,7 @@ func die():
 		$BodyShape.set_deferred("disabled", true)
 		$FieldOfView.set_deferred("enabled", false)
 		$FieldOfView/FieldOfViewArea.set_deferred("disabled", true)
-		
+	
 
 func move():
 	move_and_slide(velocity, Vector2.UP)
