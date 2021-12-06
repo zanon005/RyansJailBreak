@@ -98,14 +98,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
-"loop": false,
-"name": "attack",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 24 ), ExtResource( 33 ), ExtResource( 55 ), ExtResource( 45 ), ExtResource( 39 ), ExtResource( 60 ), ExtResource( 25 ), ExtResource( 43 ), ExtResource( 42 ), ExtResource( 40 ), ExtResource( 58 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 52 ), ExtResource( 62 ), ExtResource( 46 ), ExtResource( 22 ), ExtResource( 44 ), ExtResource( 63 ), ExtResource( 54 ) ],
 "loop": true,
 "name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
+"loop": false,
+"name": "attack",
 "speed": 5.0
 } ]
 
@@ -278,7 +278,7 @@ playing = true
 [node name="BodyAnimation" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 12
+frame = 1
 speed_scale = 6.0
 playing = true
 

@@ -11,6 +11,7 @@ func _ready():
 	chasing_icon = load("res://Sprites/Icons/RedExclamationMark.png")
 
 func _on_Policial_state_changed(currentState):
+	print(currentState)
 	match(currentState): 
 		'ROAMING':
 			texture = roaming_icon

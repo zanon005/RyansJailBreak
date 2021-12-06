@@ -1,0 +1,170 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Sprites/Enemies/Officer/officer_die_strip.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Officer/officer_headless_strip.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Officer/officer_walk_strip.png" type="Texture" id=3]
+[ext_resource path="res://src/Enemies/PolicialV2/PolicialV2.gd" type="Script" id=4]
+[ext_resource path="res://src/Enemies/EnemyStatus.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/Icons/RoamingIcon.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Misc/Fov.png" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 160, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 224, 0, 32, 45 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 49, 54 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 49, 0, 49, 54 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 98, 0, 49, 54 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 147, 0, 49, 54 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 46, 52 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 46, 0, 46, 52 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 92, 0, 46, 52 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 138, 0, 46, 52 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": false,
+"name": "die1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": false,
+"name": "die2",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=18]
+radius = 63.1229
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 43.8596, 75.4868 )
+
+[node name="Policial" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+collision_layer = 2
+collision_mask = 37
+script = ExtResource( 4 )
+
+[node name="PolicialAnimation" type="AnimatedSprite" parent="."]
+scale = Vector2( 6, 6 )
+frames = SubResource( 17 )
+animation = "walk"
+frame = 4
+playing = true
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+position = Vector2( 2, 0 )
+shape = SubResource( 18 )
+
+[node name="BodyHitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyHitBox"]
+position = Vector2( 0, 0.667435 )
+shape = SubResource( 19 )
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 800, 0 )
+collision_mask = 5
+
+[node name="Status" type="Sprite" parent="."]
+position = Vector2( -51.6396, -1.82649 )
+rotation = -1.5708
+scale = Vector2( 0.632878, 0.611263 )
+texture = ExtResource( 6 )
+script = ExtResource( 5 )
+
+[node name="FieldOfView" type="Light2D" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+offset = Vector2( 240, 0 )
+color = Color( 0.811765, 0.862745, 0.360784, 1 )
+shadow_enabled = true
+
+[node name="FieldOfViewArea" type="Area2D" parent="FieldOfView"]
+priority = 1.0
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FieldOfView/FieldOfViewArea"]
+polygon = PoolVector2Array( -5.54755, -69.7162, 389.018, -253.564, 422.959, -188.51, 462.557, -93.7578, 479.528, 8.06552, 463.971, 88.6757, 432.859, 157.972, 403.16, 213.127, 373.462, 251.31, -6.96176, 85.8473 )
+
+[connection signal="state_changed" from="." to="Status" method="_on_Policial_state_changed"]
+[connection signal="area_entered" from="BodyHitBox" to="." method="_on_BodyHitBox_area_entered"]
+[connection signal="body_entered" from="FieldOfView/FieldOfViewArea" to="." method="_on_FieldOfViewArea_body_entered"]
+[connection signal="body_exited" from="FieldOfView/FieldOfViewArea" to="." method="_on_FieldOfViewArea_body_exited"]
