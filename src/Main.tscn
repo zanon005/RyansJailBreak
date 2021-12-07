@@ -41,3 +41,5 @@ margin_bottom = 881.703
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="scenePlayerDied" from="CurrentLevel" to="." method="_on_CurrentLevel_scenePlayerDied"]

@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
-export var run_speed := 300
+export var damage := 25
+export var run_speed := 150
 export var health := 100
 onready var animation := $PolicialAnimation
+var distanceThreshold = 5
 var velocity := Vector2()
 enum STATE {ROAMING, CHASING_PLAYER, GOINGTO_LAST_KOWN_PLAYER_POS, DEAD}
 var currentState = 0
@@ -59,9 +61,9 @@ func _physics_process(_delta):
 		generate_path_to(currentPositionToGoTo)
 		navigate()
 		move()
-	print("CurrentState: '", 
-		STATE.keys()[currentState], 
-		"', GoingTo: [",currentRoamingIndexPoint,"] At: ",currentPositionToGoTo)
+	#print("CurrentState: '", 
+	#	STATE.keys()[currentState], 
+	#	"', GoingTo: [",currentRoamingIndexPoint,"] At: ",currentPositionToGoTo)
 		
 func _state_machine():
 	match currentState:
@@ -79,6 +81,7 @@ func _state_machine():
 				#Keep chasing while player is detected
 				if( !(playerIsInFov && playerIsVisible) ):
 					_updateState(STATE.GOINGTO_LAST_KOWN_PLAYER_POS)
+					currentPositionToGoTo = lastKnownPlayerPosition
 				else:
 					_chasePlayer()
 			STATE.GOINGTO_LAST_KOWN_PLAYER_POS:
@@ -99,23 +102,15 @@ func _state_machine():
 
 func _chasePlayer():
 	currentPositionToGoTo = player.global_position
-	#look_at(currentPositionToGoTo)
+	look_at(currentPositionToGoTo)
 	lastKnownPlayerPosition = currentPositionToGoTo
 
 func _updateState(newState):
 	currentState = newState
 	emit_signal("state_changed", STATE.keys()[newState])
 
-func compare_position_with_aprox_range(pos1, pos2, tolerance=5):
-	var diffX = abs(pos1[0] - pos2[0])
-	var diffY = abs(pos1[1] - pos2[1])
-	
-	if( (diffX > 0 && diffX < tolerance) &&  (diffY > 0 && diffY < tolerance) ):
-		return true
-	return false
-
 func check_if_reached_current_roaming_point() -> bool:
-	if(global_position.distance_to(currentPositionToGoTo) < 5):
+	if(global_position.distance_to(currentPositionToGoTo) < distanceThreshold):
 		return true
 	else:
 		return false
@@ -138,12 +133,12 @@ func generate_path_to(destination : Vector2):
 func navigate(): #Defines the next position the enemy must moove
 	if(currentPath.size() > 1):
 		velocity = global_position.direction_to(currentPath[1]) * run_speed
-		#if(currentState != STATE.CHASING_PLAYER):
-		look_at(currentPath[1])
+		if(currentState != STATE.CHASING_PLAYER):
+			look_at(currentPath[1])
 		#	If the current global position is equal to current path point
 		# then pop this point that is already visited
-		if(compare_position_with_aprox_range(currentPath[0], global_position, 1)):
-			currentPath.pop_front()
+		if(currentPath[0].distance_to(global_position) < distanceThreshold):
+			currentPath.remove(0)
 	
 func die():
 	if(currentState != STATE.DEAD):
@@ -159,7 +154,7 @@ func die():
 		$BodyShape.set_deferred("disabled", true)
 		$FieldOfView.set_deferred("enabled", false)
 		$FieldOfView/FieldOfViewArea.set_deferred("disabled", true)
-	
+
 
 func move():
 	move_and_slide(velocity, Vector2.UP)
@@ -173,11 +168,15 @@ func check_if_player_is_in_visible_range() -> bool:
 	return playerIsVisible
 
 #Only colides with "player_weapon" layer
-func _on_BodyHitBox_area_entered(_area):
-	if(currentState != STATE.DEAD):
-		health = health - 50
-		if(health <= 0):
-			die()
+func _on_BodyHitBox_area_entered(area):
+	if(area.is_in_group("PlayerWeapon")):
+		if(currentState != STATE.DEAD):
+			health = health - 50
+			if(health <= 0):
+				die()
+
+func getEnemyDamage():
+	return damage
 
 func _on_FieldOfViewArea_body_entered(body):
 	if(body.is_in_group("Player")):

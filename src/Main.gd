@@ -15,3 +15,7 @@ func _physics_process(delta: float) -> void:
 	#if player.position.y > sceneLimit.position.y:
 	#	get_tree().change_scene("res://Levels/GameOver.tscn")
 	pass
+
+
+func _on_CurrentLevel_scenePlayerDied():
+	print("Main, player died")
