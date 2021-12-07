@@ -16,7 +16,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
+AudioPlayer="*res://src/AudioPlayer.gd"
 PlayerInventory="*res://src/Player/PlayerInventory.gd"
+
+[global]
+
+load=false
 
 [input]
 

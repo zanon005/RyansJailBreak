@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Misc/Doors/OrangeDoor.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Misc/porta-vermelha.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 42.7914, 51.8614 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 40.4463, 49.6823 )
+
+[node name="OrangeDoor" type="KinematicBody2D" groups=[
+"Door",
+]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="DoorColisionArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorColisionArea"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="body_entered" from="DoorColisionArea" to="." method="_on_DoorColisionArea_body_entered"]

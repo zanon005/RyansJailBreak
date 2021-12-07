@@ -98,31 +98,30 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
-"loop": false,
-"name": "attack",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 24 ), ExtResource( 33 ), ExtResource( 55 ), ExtResource( 45 ), ExtResource( 39 ), ExtResource( 60 ), ExtResource( 25 ), ExtResource( 43 ), ExtResource( 42 ), ExtResource( 40 ), ExtResource( 58 ), ExtResource( 57 ), ExtResource( 53 ), ExtResource( 52 ), ExtResource( 62 ), ExtResource( 46 ), ExtResource( 22 ), ExtResource( 44 ), ExtResource( 63 ), ExtResource( 54 ) ],
 "loop": true,
 "name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 65 ), ExtResource( 67 ), ExtResource( 69 ), ExtResource( 66 ), ExtResource( 64 ), ExtResource( 70 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 71 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 73 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 56 ) ],
+"loop": false,
+"name": "attack",
 "speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 69.0504
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 79.6133, 67.6734 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 67.1372, 135.905 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 112.591, 111.088 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "attack"
+[sub_resource type="Animation" id=14]
 length = 0.5
 step = 0.005
 tracks/0/type = "value"
@@ -186,8 +185,8 @@ tracks/4/keys = {
 "values": [ "attack" ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "idle"
+[sub_resource type="Animation" id=8]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyAnimation:animation")
 tracks/0/interp = 1
@@ -225,8 +224,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "walk"
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("FeetAnimation:animation")
@@ -265,7 +263,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "hit"
 length = 1.5
 tracks/0/type = "value"
@@ -307,10 +305,9 @@ speed_scale = 6.0
 playing = true
 
 [node name="BodyAnimation" type="AnimatedSprite" parent="."]
-position = Vector2( 20, 38 )
 frames = SubResource( 2 )
-animation = "attack"
-frame = 14
+animation = "idle"
+frame = 15
 speed_scale = 6.0
 playing = true
 
@@ -323,7 +320,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyHitbox"]
 position = Vector2( -18.4327, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 11 )
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=[
 "PlayerWeapon",
@@ -333,7 +330,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 position = Vector2( 120, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 12 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
@@ -344,15 +341,15 @@ collision_layer = 0
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupItemsZone"]
-shape = SubResource( 8 )
+shape = SubResource( 13 )
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/walk = SubResource( 7 )
+anims/attack = SubResource( 14 )
+anims/idle = SubResource( 8 )
+anims/walk = SubResource( 9 )
 
 [node name="AuxAnimations" type="AnimationPlayer" parent="."]
-anims/hit = SubResource( 11 )
+anims/hit = SubResource( 10 )
 
 [connection signal="body_entered" from="BodyHitbox" to="." method="_on_BodyHitbox_body_entered"]
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_AttackHitbox_body_entered"]

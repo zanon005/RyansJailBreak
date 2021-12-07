@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var itemName = "BlueKey"
+export var itemName = "GreenKey"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +12,7 @@ func _ready():
 #	pass
 
 func pickUpItem():
+	AudioPlayer.playSound("res://audios/PickingUpKeys.mp3")
 	PlayerInventory.add_item(itemName, 1)
 	get_tree().call_group("UI", "addNewItemToUI_Iventory", self, $Sprite.texture.resource_path)
 	queue_free()

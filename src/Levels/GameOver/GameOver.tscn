@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/Levels/GameOver/GameOver.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+outline_size = 7
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[node name="GameOver" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0470588, 0.211765, 0.270588, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 170.0
+margin_top = 207.0
+margin_right = 854.0
+margin_bottom = 392.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 684.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 1 )
+text = "GAME OVER"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 124.0
+margin_right = 684.0
+margin_bottom = 185.0
+custom_fonts/font = SubResource( 2 )
+text = "Try Again!"
+align = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/Label2"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Label2/Button" to="." method="_on_Button_pressed"]
