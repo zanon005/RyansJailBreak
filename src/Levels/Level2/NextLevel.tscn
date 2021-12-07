@@ -7,13 +7,14 @@
 [ext_resource path="res://Sprites/TileMap/chao-parede-externas-64_v2.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/Misc/porta-vermelha.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Misc/porta-roxa.png" type="Texture" id=13]
-[ext_resource path="res://src/Items/Keys/OrangeKey.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/Items/Keys/YellowKey.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/Items/Keys/GreenKey.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Misc/Items/Keys/OrangeKey.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Misc/Items/Keys/YellowKey.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Misc/Items/Keys/GreenKey.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Items/Keys/BlueKey.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/Items/Keys/PurpleKey.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/Items/Keys/RedKey.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/Misc/Items/Keys/PurpleKey.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Misc/Items/Keys/RedKey.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=20]
+
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )

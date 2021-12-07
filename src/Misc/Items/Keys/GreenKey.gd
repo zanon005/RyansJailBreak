@@ -12,6 +12,7 @@ func _ready():
 #	pass
 
 func pickUpItem():
+	AudioPlayer.playSound("res://audios/PickingUpKeys.mp3")
 	PlayerInventory.add_item(itemName, 1)
 	get_tree().call_group("UI", "addNewItemToUI_Iventory", self, $Sprite.texture.resource_path)
 	queue_free()

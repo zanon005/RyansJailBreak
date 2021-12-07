@@ -1,0 +1,274 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://src/LevelNavigationWithTileset.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Misc/Items/Keys/RedKey.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Misc/Doors/BlueDoor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Misc/Items/Keys/YellowKey.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Misc/Items/Keys/GreenKey.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Misc/Doors/OrangeBlueDoor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Misc/Doors/GreenDoor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Misc/Doors/RedDoor.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Misc/Doors/YellowDoor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Misc/Items/Keys/BlueKey.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Misc/Items/Keys/OrangeKey.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Enemies/PolicialV2/PolicialV2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Levels/Level2/Level2.gd" type="Script" id=14]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+export var itemName = \"GreenKey\"
+#onready var audioPlayer = $AudioStreamPlayer
+onready var audioPlayer2 = $AudioStreamPlayer2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func pickUpItem():
+	AudioPlayer.playSound(\"res://audios/PickingUpKeys.mp3\")
+	PlayerInventory.add_item(itemName, 1)
+	get_tree().call_group(\"UI\", \"addNewItemToUI_Iventory\", self, $Sprite.texture.resource_path)
+	queue_free()
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends KinematicBody2D
+
+export var itemName = \"RedKey\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func pickUpItem():
+	AudioPlayer.playSound(\"res://audios/PickingUpKeys.mp3\")
+	PlayerInventory.add_item(itemName, 1)
+	get_tree().call_group(\"UI\", \"addNewItemToUI_Iventory\", self, $Sprite.texture.resource_path)
+	queue_free()
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends KinematicBody2D
+
+export var itemName = \"YellowKey\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func pickUpItem():
+	AudioPlayer.playSound(\"res://audios/PickingUpKeys.mp3\")
+	PlayerInventory.add_item(itemName, 1)
+	get_tree().call_group(\"UI\", \"addNewItemToUI_Iventory\", self, $Sprite.texture.resource_path)
+	queue_free()
+"
+
+[node name="Fase2" type="Node2D"]
+script = ExtResource( 14 )
+
+[node name="LevelNavigation" parent="." instance=ExtResource( 1 )]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2945.88, 166.108 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Keys" type="Node" parent="."]
+
+[node name="RoamingPoints" type="Node" parent="."]
+
+[node name="Node3" type="Node" parent="."]
+
+[node name="Node4" type="Node" parent="."]
+
+[node name="RoamingPoints2" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RoamingPoint" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 2854.44, 1703.67 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint2" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 197.473, 1872.96 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint3" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 3285.34, 1157.19 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint4" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 3361.74, 478.596 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint5" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 2311.99, 1288.59 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint6" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 1318.81, 143.152 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint7" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 2432.57, 143.39 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint8" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 2317.1, 1909.5 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint9" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 1596.76, 1270.55 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint10" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 1001.33, 1339.6 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint11" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 1009.75, 1900 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint12" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 181.129, 1082.66 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint13" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 1605.05, 802.966 )
+scale = Vector2( 5, 5 )
+
+[node name="RoamingPoint14" type="Position2D" parent="RoamingPoints2" groups=[
+"RoamingPoint",
+]]
+position = Vector2( 2562.8, 947.053 )
+scale = Vector2( 5, 5 )
+
+[node name="Itens" type="Node" parent="."]
+
+[node name="GreenKey" parent="Itens" instance=ExtResource( 6 )]
+position = Vector2( 3393.41, 1930.61 )
+script = SubResource( 1 )
+
+[node name="RedKey" parent="Itens" instance=ExtResource( 3 )]
+position = Vector2( 67.8506, 1959.21 )
+script = SubResource( 2 )
+
+[node name="YellowKey" parent="Itens" instance=ExtResource( 5 )]
+position = Vector2( 2480.47, 956.792 )
+script = SubResource( 3 )
+
+[node name="BlueKey" parent="Itens" instance=ExtResource( 11 )]
+position = Vector2( 126.992, 244.46 )
+
+[node name="OrangeKey" parent="Itens" instance=ExtResource( 12 )]
+position = Vector2( 1443.49, 1605.12 )
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="GreenDoor" parent="Doors" instance=ExtResource( 8 )]
+position = Vector2( 160.452, 799.754 )
+scale = Vector2( 5, 2 )
+
+[node name="RedDoor" parent="Doors" instance=ExtResource( 9 )]
+position = Vector2( 1600.97, 1077.58 )
+scale = Vector2( 4, 2 )
+
+[node name="YellowDoor" parent="Doors" instance=ExtResource( 10 )]
+position = Vector2( 638.705, 1500.71 )
+scale = Vector2( 4, 1.5 )
+
+[node name="BlueDoor" parent="Doors" instance=ExtResource( 4 )]
+position = Vector2( 1440.07, 1747.62 )
+scale = Vector2( 3, 1 )
+
+[node name="BlueDoor2" parent="Doors" instance=ExtResource( 7 )]
+position = Vector2( 3387.86, -34.2464 )
+scale = Vector2( 3, 3 )
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Policial2" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 1411.18, 1606.24 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial3" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 949.7, 281.737 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial4" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 134.62, 485.507 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial5" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 2220.26, 1702.13 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial6" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 1674.88, 323.69 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial7" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 434.282, 1798.02 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial8" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 2783.63, 1618.23 )
+scale = Vector2( 0.55, 0.55 )
+
+[node name="Policial9" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 689.943, 727.558 )
+scale = Vector2( 0.55, 0.55 )
+
+[connection signal="playerDied" from="Player" to="." method="_on_Player_playerDied"]

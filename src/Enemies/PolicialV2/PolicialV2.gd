@@ -175,12 +175,10 @@ func _on_BodyHitBox_area_entered(area):
 				health = health - (2 * player.getPlayerDamage())
 			else:
 				health = health - player.getPlayerDamage()
-			_updateState(STATE.CHASING_PLAYER)
 			if(health <= 0):
 				die()
 
 func getEnemyDamage():
-	_updateState(STATE.CHASING_PLAYER)
 	return damage
 
 func _on_FieldOfViewArea_body_entered(body):

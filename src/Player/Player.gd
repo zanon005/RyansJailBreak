@@ -26,13 +26,10 @@ func get_input():
 	
 	if !isAttacking:
 		if velocity.x !=0 or velocity.y !=0:
-			pass
 			playerAnimations.play("walk")
 		else:
-			pass
 			playerAnimations.play("idle")
 	else:
-		pass
 		playerAnimations.play("attack")
 
 func _physics_process(delta):
