@@ -455,10 +455,14 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 [node name="CurrentLevel" type="Node2D"]
 script = ExtResource( 2 )
 
+<<<<<<< HEAD
+[node name="LevelNavigation" type="Navigation2D" parent="." groups=["LevelNavigation"]]
+=======
 [node name="LevelNavigation" type="Navigation2D" parent="." groups=[
 "LevelNavigation",
 ]]
 z_index = -1
+>>>>>>> dev
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -540,20 +544,30 @@ scale = Vector2( 5, 5 )
 position = Vector2( 1307.85, 1165.78 )
 scale = Vector2( 5, 5 )
 
+<<<<<<< HEAD
+[node name="RoamingPoint10" type="Position2D" parent="RoamingPoints" groups=["RoamingPoint"]]
+position = Vector2( 965.127, 1486.22 )
+=======
 [node name="RoamingPoint10" type="Position2D" parent="RoamingPoints" groups=[
 "RoamingPoint",
 ]]
 position = Vector2( 950.535, 1476.12 )
+>>>>>>> dev
 scale = Vector2( 5, 5 )
 
 [node name="RoamingPoint11" type="Position2D" parent="RoamingPoints" groups=["RoamingPoint"]]
 position = Vector2( 1289.13, 1922.22 )
 scale = Vector2( 5, 5 )
 
+<<<<<<< HEAD
+[node name="RoamingPoint12" type="Position2D" parent="RoamingPoints" groups=["RoamingPoint"]]
+position = Vector2( 141.929, 1162.12 )
+=======
 [node name="RoamingPoint12" type="Position2D" parent="RoamingPoints" groups=[
 "RoamingPoint",
 ]]
 position = Vector2( 142.988, 1150.47 )
+>>>>>>> dev
 scale = Vector2( 5, 5 )
 
 [node name="Itens" type="Node" parent="."]

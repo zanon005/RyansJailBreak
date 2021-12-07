@@ -21,3 +21,6 @@ func _process(delta):
 	if $AudioStreamPlayer.playing == false:
 		$AudioStreamPlayer.play()
 	pass
+
+func _on_CurrentLevel_scenePlayerDied():
+	print("Main, player died")

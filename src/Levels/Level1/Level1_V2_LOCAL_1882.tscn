@@ -1,14 +1,16 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Levels/Level1/Level1_V2.gd" type="Script" id=2]
-[ext_resource path="res://src/Misc/Doors/RedDoor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Misc/Items/Keys/YellowKey.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Misc/Items/Keys/PurpleKey.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Misc/Items/Keys/GreenKey.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Misc/Items/Keys/BlueKey.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Misc/Items/Keys/RedKey.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/Misc/Items/Keys/OrangeKey.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sprites/Misc/porta-azul.png" type="Texture" id=3]
+[ext_resource path="res://src/Items/Keys/YellowKey.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Items/Keys/PurpleKey.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/Misc/porta-vermelha.png" type="Texture" id=6]
+[ext_resource path="res://src/Items/Keys/GreenKey.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Items/Keys/BlueKey.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/Misc/porta-verde-amarela-vermelha.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Misc/porta-roxa.png" type="Texture" id=10]
+[ext_resource path="res://src/Items/Keys/RedKey.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Items/Keys/OrangeKey.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Sprites/TileMap/paredes-internas-64_v2.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/TileMap/chao-parede-externas-64_v2.png" type="Texture" id=14]
 [ext_resource path="res://src/Enemies/PolicialV2/PolicialV2.tscn" type="PackedScene" id=17]
@@ -453,12 +455,8 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 15/z_index = 0
 
 [node name="CurrentLevel" type="Node2D"]
-script = ExtResource( 2 )
 
-[node name="LevelNavigation" type="Navigation2D" parent="." groups=[
-"LevelNavigation",
-]]
-z_index = -1
+[node name="LevelNavigation" type="Navigation2D" parent="." groups=["LevelNavigation"]]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -473,7 +471,6 @@ tile_data = PoolIntArray( -131075, 13, 0, -131074, 13, 0, -131073, 13, 0, -19660
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 921.71, 1831.2 )
 scale = Vector2( 0.5, 0.5 )
-z_index = 1
 collision_mask = 38
 run_speed = 400
 
@@ -492,12 +489,33 @@ __meta__ = {
 [node name="Policial2" parent="Enemies" instance=ExtResource( 17 )]
 position = Vector2( 1489.09, 1624.22 )
 scale = Vector2( 0.55, 0.55 )
+run_speed = 100
 
 [node name="Doors" type="Node" parent="."]
 
-[node name="RedDoor" parent="Doors" instance=ExtResource( 3 )]
-position = Vector2( 1280.71, 520.348 )
-scale = Vector2( 4, 2 )
+[node name="PortaProximaFase" type="Sprite" parent="Doors"]
+visible = false
+position = Vector2( 2818.43, 1421.92 )
+scale = Vector2( 3.54361, 1.5946 )
+texture = ExtResource( 9 )
+
+[node name="PortaRoxa" type="Sprite" parent="Doors"]
+visible = false
+position = Vector2( 2047.74, 1704.33 )
+scale = Vector2( 2.0772, 1.82052 )
+texture = ExtResource( 10 )
+
+[node name="PortaAzul" type="Sprite" parent="Doors"]
+visible = false
+position = Vector2( 1249.57, 898.782 )
+scale = Vector2( 3.03523, 1.17573 )
+texture = ExtResource( 3 )
+
+[node name="Porta Vermelha" type="Sprite" parent="Doors"]
+visible = false
+position = Vector2( 2531.91, 430.87 )
+scale = Vector2( 3.16583, 1.65987 )
+texture = ExtResource( 6 )
 
 [node name="RoamingPoints" type="Node2D" parent="."]
 __meta__ = {
@@ -540,26 +558,22 @@ scale = Vector2( 5, 5 )
 position = Vector2( 1307.85, 1165.78 )
 scale = Vector2( 5, 5 )
 
-[node name="RoamingPoint10" type="Position2D" parent="RoamingPoints" groups=[
-"RoamingPoint",
-]]
-position = Vector2( 950.535, 1476.12 )
+[node name="RoamingPoint10" type="Position2D" parent="RoamingPoints" groups=["RoamingPoint"]]
+position = Vector2( 965.127, 1486.22 )
 scale = Vector2( 5, 5 )
 
 [node name="RoamingPoint11" type="Position2D" parent="RoamingPoints" groups=["RoamingPoint"]]
 position = Vector2( 1289.13, 1922.22 )
 scale = Vector2( 5, 5 )
 
-[node name="RoamingPoint12" type="Position2D" parent="RoamingPoints" groups=[
-"RoamingPoint",
-]]
-position = Vector2( 142.988, 1150.47 )
+[node name="RoamingPoint12" type="Position2D" parent="RoamingPoints" groups=["RoamingPoint"]]
+position = Vector2( 141.929, 1162.12 )
 scale = Vector2( 5, 5 )
 
 [node name="Itens" type="Node" parent="."]
 
 [node name="Key" parent="Itens" instance=ExtResource( 8 )]
-position = Vector2( 372.03, 1931.6 )
+position = Vector2( 792.478, 1822.28 )
 
 [node name="Key2" parent="Itens" instance=ExtResource( 7 )]
 position = Vector2( 503.152, 1542.73 )
@@ -575,5 +589,3 @@ position = Vector2( 131.373, 1610.38 )
 
 [node name="Key6" parent="Itens" instance=ExtResource( 4 )]
 position = Vector2( 144.087, 1462.06 )
-
-[connection signal="playerDied" from="Player" to="." method="_on_Player_playerDied"]

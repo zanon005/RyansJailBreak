@@ -13,6 +13,12 @@ func add_item(itemName, itemQuantity):
 	inventory[itemCount] = [itemName, itemQuantity]
 	itemCount += 1
 	
+func checkIfHasDoorKey(keyName):
+	for index_item in inventory:
+		if (inventory[index_item][0] == keyName):
+			return true
+	return false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
