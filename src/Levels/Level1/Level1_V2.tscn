@@ -1,17 +1,14 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Levels/Level1/Level1_V2.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Misc/porta-azul.png" type="Texture" id=3]
-[ext_resource path="res://src/Items/Keys/YellowKey.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Items/Keys/PurpleKey.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/Misc/porta-vermelha.png" type="Texture" id=6]
-[ext_resource path="res://src/Items/Keys/GreenKey.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Items/Keys/BlueKey.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Sprites/Misc/porta-verde-amarela-vermelha.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Misc/porta-roxa.png" type="Texture" id=10]
-[ext_resource path="res://src/Items/Keys/RedKey.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/Items/Keys/OrangeKey.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/Misc/Doors/RedDoor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Misc/Items/Keys/YellowKey.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Misc/Items/Keys/PurpleKey.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Misc/Items/Keys/GreenKey.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Misc/Items/Keys/BlueKey.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Misc/Items/Keys/RedKey.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Misc/Items/Keys/OrangeKey.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Sprites/TileMap/paredes-internas-64_v2.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/TileMap/chao-parede-externas-64_v2.png" type="Texture" id=14]
 [ext_resource path="res://src/Enemies/PolicialV2/PolicialV2.tscn" type="PackedScene" id=17]
@@ -498,29 +495,9 @@ scale = Vector2( 0.55, 0.55 )
 
 [node name="Doors" type="Node" parent="."]
 
-[node name="PortaProximaFase" type="Sprite" parent="Doors"]
-visible = false
-position = Vector2( 2818.43, 1421.92 )
-scale = Vector2( 3.54361, 1.5946 )
-texture = ExtResource( 9 )
-
-[node name="PortaRoxa" type="Sprite" parent="Doors"]
-visible = false
-position = Vector2( 2047.74, 1704.33 )
-scale = Vector2( 2.0772, 1.82052 )
-texture = ExtResource( 10 )
-
-[node name="PortaAzul" type="Sprite" parent="Doors"]
-visible = false
-position = Vector2( 1249.57, 898.782 )
-scale = Vector2( 3.03523, 1.17573 )
-texture = ExtResource( 3 )
-
-[node name="Porta Vermelha" type="Sprite" parent="Doors"]
-visible = false
-position = Vector2( 2531.91, 430.87 )
-scale = Vector2( 3.16583, 1.65987 )
-texture = ExtResource( 6 )
+[node name="RedDoor" parent="Doors" instance=ExtResource( 3 )]
+position = Vector2( 1280.71, 520.348 )
+scale = Vector2( 4, 2 )
 
 [node name="RoamingPoints" type="Node2D" parent="."]
 __meta__ = {
