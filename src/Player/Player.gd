@@ -54,6 +54,9 @@ func die():
 	print("Rip player")
 	currentState = STATE.DEAD
 	emit_signal("playerDied")
+	
+func getPlayerDamage():
+	return damage
 
 # Only colides with 'enemies'
 func _on_BodyHitbox_body_entered(body):

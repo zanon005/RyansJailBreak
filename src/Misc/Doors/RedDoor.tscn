@@ -24,9 +24,9 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorColisionArea"]
 shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [connection signal="body_entered" from="DoorColisionArea" to="." method="_on_DoorColisionArea_body_entered"]
