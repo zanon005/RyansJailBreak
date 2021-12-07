@@ -15,3 +15,6 @@ func pickUpItem():
 	PlayerInventory.add_item(itemName, 1)
 	get_tree().call_group("UI", "addNewItemToUI_Iventory", self, $Sprite.texture.resource_path)
 	queue_free()
+	$AudioStreamPlayer.play()
+	pass
+

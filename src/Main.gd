@@ -15,3 +15,9 @@ func _physics_process(delta: float) -> void:
 	#if player.position.y > sceneLimit.position.y:
 	#	get_tree().change_scene("res://Levels/GameOver.tscn")
 	pass
+
+func _process(delta):
+	
+	if $AudioStreamPlayer.playing == false:
+		$AudioStreamPlayer.play()
+	pass
