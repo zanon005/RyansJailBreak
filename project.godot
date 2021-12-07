@@ -14,6 +14,10 @@ config/name="Ryans Jail Break"
 run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerInventory="*res://src/Player/PlayerInventory.gd"
+
 [input]
 
 left={
@@ -51,13 +55,12 @@ attack={
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemies"
-2d_physics/layer_3="enviroment"
+2d_physics/layer_3="walls"
 2d_physics/layer_4="player_weapon"
+2d_physics/layer_5="floor"
+2d_physics/layer_6="interactables"
+2d_physics/layer_7="items"
 
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"
