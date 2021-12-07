@@ -17,9 +17,7 @@ __meta__ = {
 
 [node name="CurrentLevel" parent="." instance=ExtResource( 1 )]
 
-[node name="UI" type="CanvasLayer" parent="." groups=[
-"UI",
-]]
+[node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
 script = ExtResource( 5 )
 
 [node name="InventoryTitle" type="Label" parent="UI"]
