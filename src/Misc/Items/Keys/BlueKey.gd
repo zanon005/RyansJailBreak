@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var itemName = "GreenKey"
+export var itemName = "BlueKey"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
